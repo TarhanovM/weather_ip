@@ -11,8 +11,12 @@ class TestGpsCoordinates(unittest.TestCase):
         pass
 
     def test_get_weather(self):
-        pass
-
-
-
-
+        weather = get_weather(('1', '1'))
+        self.assertIn('text', weather['current']['condition'].keys())
+        self.assertIn('country', weather['location'].keys())
+        self.assertIn('region', weather['location'].keys())
+        self.assertIn('name', weather['location'].keys())
+        self.assertIn('temp_c', weather['current'].keys())
+        self.assertIn('wind_kph', weather['current'].keys())
+        self.assertIn('wind_dir', weather['current'].keys())
+        self.assertIn('pressure_mb', weather['current'].keys())

@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
-
-def weather_short_format():
-    pass
+def weather_short_format(weather: dict) -> None:
+    print(f"Condition:         {weather['current']['condition']['text']}")
+    print(f"Temperature:       {weather['current']['temp_c']}")
+    print(f"Wind, kph:         {weather['current']['wind_kph']}")
+    print(f"Wind directional:  {weather['current']['wind_dir']}")
+    print(f"Pressure, kPa:     {weather['current']['pressure_mb']}")
