@@ -1,1 +1,3 @@
 #!/usr/bin/env python3.10
+from gps_coordinates import get_coordinates
+print(get_coordinates())
