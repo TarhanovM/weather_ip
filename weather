@@ -2,7 +2,7 @@
 import sys
 import os
 
-os.environ["API_KEY"]='<yuor api key>'
+os.environ["API_KEY"] = 'ca0f5103f17a4b799e2103453222205'
 sys.path.insert(0, '/home/tmd/PycharmProjects/Weather_for_IP')
 activate_this = str(os.path.dirname(sys.executable)) + '/activate_this.py'
 with open(activate_this) as f:
