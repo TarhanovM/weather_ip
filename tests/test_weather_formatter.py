@@ -24,7 +24,8 @@ class TestGpsCoordinates(unittest.TestCase):
         pass
 
     def test_only_numbers(self):
-        printed_data = f"Condition:         {self.weather['current']['condition']['text']}\n" \
+        printed_data = f'The current weather:\n' \
+                       f"Condition:         {self.weather['current']['condition']['text']}\n" \
                        f"Temperature:       {self.weather['current']['temp_c']}\n" \
                        f"Wind, kph:         {self.weather['current']['wind_kph']}\n" \
                        f"Wind directional:  {self.weather['current']['wind_dir']}\n" \

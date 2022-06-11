@@ -12,5 +12,6 @@ class TestGpsCoordinates(unittest.TestCase):
 
     def test_get_coordinates(self):
         coordinates = get_coordinates()
-        self.assertEqual(type(coordinates), str)
 
+        self.assertEqual(type(coordinates), tuple)
+        self.assertEqual(len(coordinates), 2)

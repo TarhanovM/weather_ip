@@ -11,7 +11,8 @@ class TestGpsCoordinates(unittest.TestCase):
         pass
 
     def test_get_weather(self):
-        weather = get_weather(('1', '1'))
+        weather = get_weather((42.3121, 31.1235))
+        self.assertIsInstance(weather, dict)
         self.assertIn('text', weather['current']['condition'].keys())
         self.assertIn('country', weather['location'].keys())
         self.assertIn('region', weather['location'].keys())
