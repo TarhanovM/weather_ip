@@ -1,0 +1,17 @@
+#!/home/tmd/PycharmProjects/Weather_for_IP/venv/bin/python
+import sys
+import os
+
+sys.path.insert(0, '/home/tmd/PycharmProjects/Weather_for_IP')
+activate_this = str(os.path.dirname(sys.executable)) + '/activate_this.py'
+with open(activate_this) as f:
+    code = compile(f.read(), activate_this, 'exec')
+    exec(code, dict(__file__=activate_this))
+
+
+from config import Config
+from gps_coordinates import get_coordinates
+from weather_api_service import get_weather
+from weather_formatter import weather_short_format
+
+if __name__ == '__main__':
