@@ -7,8 +7,8 @@ def weather_short_format(weather: dict) -> None:
     :return: None
     """
     try:
-        print('The current weather:')
-        print(f"Condition:         {weather['current']['condition']['text']}")
+
+        print(f"The current weather:\nCondition:         {weather['current']['condition']['text']}")
         print(f"Temperature:       {weather['current']['temp_c']}")
         print(f"Wind, kph:         {weather['current']['wind_kph']}")
         print(f"Wind directional:  {weather['current']['wind_dir']}")

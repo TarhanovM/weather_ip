@@ -16,19 +16,35 @@ class Config(object):
             cls.instance = super(Config, cls).__new__(cls)
         return cls.instance
 
-    API_KEY = os.environ.get('API_KEY')
+    API_KEY = os.environ.get('API_KEY') or None
     FORMAT = os.environ.get('FORMAT') or 'short'
 
     @staticmethod
-    def set_environment(key_env, value_env):
+    def initialize_variables() -> None:
         """
-        This is staticmethod that sets user environment variable.
-        :param key_env: this is name variable.
-        :param value_env: this is value variable.
-        :return: The message is print from user console.
+        This is staticmethod that initializes user environment variable.
+        :return: None.
         """
-        try:
-            os.environ[key_env] = value_env
-            print('Success!')
-        except Exception as ex:
-            print('Problem:', ex)
+        settings_path = f'{os.getcwd()}/settings.txt'
+        file_exists = os.path.exists(settings_path)
+        print(file_exists)
+        if file_exists:
+            with open(settings_path, 'r', encoding='utf-8') as file:
+                data_file = file.readlines()
+                for line in data_file:
+                    key, value = line.split('=')
+                    Config().key = value
+        else:
+            with open('settings.txt', 'w', encoding='utf-8') as file:
+                variables = list(filter(lambda x: x.isupper(), dir(Config())))
+                print(variables)
+                for variable in variables:
+                    file.write(f'{variable}={getattr(Config, variable)}\n')
+
+    @staticmethod
+    def set_variable(key, value) -> None:
+
+        Config().key = value
+        Config().initialize_variables()
+
+

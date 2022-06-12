@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from weather_api_service import get_weather
+from config import Config
 
 
 class TestGpsCoordinates(unittest.TestCase):
@@ -11,7 +12,7 @@ class TestGpsCoordinates(unittest.TestCase):
         pass
 
     def test_get_weather(self):
-        weather = get_weather((42.3121, 31.1235))
+        weather = get_weather((42.3121, 31.1235), Config())
         self.assertIsInstance(weather, dict)
         self.assertIn('text', weather['current']['condition'].keys())
         self.assertIn('country', weather['location'].keys())
