@@ -6,6 +6,7 @@ from weather_api_service import get_weather
 from weather_formatter import weather_short_format
 
 
+
 @click.group('weather')
 def cli():
     """The util gets your current weather"""
@@ -26,10 +27,10 @@ def current_weather():
 
 @cli.command('api')
 @click.argument('value', required=False)
-def set_api_environment(value_env):
+def set_api_environment(value):
     """You can get and install api key"""
-    if value_env is not None:
-        setattr(Config(), 'API_KEY', value_env)
+    if value is not None:
+        setattr(Config(), 'API_KEY', value)
     click.echo(f'Your api key: {Config().API_KEY}')
 
 
