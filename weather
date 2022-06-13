@@ -2,7 +2,8 @@
 import sys
 import os
 
-sys.path.insert(0, '/home/tmd/PycharmProjects/Weather_for_IP')
+project_path = os.readlink('/usr/bin/weather').split('/')
+sys.path.insert(0, '/'.join(project_path[:-1]))
 activate_this = str(os.path.dirname(sys.executable)) + '/activate_this.py'
 with open(activate_this) as f:
     code = compile(f.read(), activate_this, 'exec')
