@@ -6,11 +6,9 @@ from weather_api_service import get_weather
 from weather_formatter import weather_short_format
 
 
-
 @click.group('weather')
 def cli():
     """The util gets your current weather"""
-
     pass
 
 
