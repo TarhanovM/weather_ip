@@ -7,8 +7,10 @@ class Config(object):
     The Config class provides a means to retrieve configuration preferences.
     This is a singleton class.
     Attributes:
+
     API_KEY (str): This is an environment variable which must be having from WeatherAPI.com and
-                   must be setting to environment.
+    must be setting to environment.
+
     FORMAT (str): This is an environment variable which user sets."""
 
     def __new__(cls):
@@ -16,8 +18,7 @@ class Config(object):
             cls.instance = super(Config, cls).__new__(cls)
         return cls.instance
 
-    API_KEY = os.environ.get('API_KEY') or None
-    FORMAT = os.environ.get('FORMAT') or 'short'
+    SETTINGS_PATH = '/'.join(os.readlink('/usr/bin/weather').split('/')[:-1]) + '/settings.txt'
 
     @staticmethod
     def initialize_variables() -> None:
@@ -25,26 +26,28 @@ class Config(object):
         This is staticmethod that initializes user environment variable.
         :return: None.
         """
-        settings_path = f'{os.getcwd()}/settings.txt'
-        file_exists = os.path.exists(settings_path)
-        print(file_exists)
+        file_exists = os.path.exists(Config().SETTINGS_PATH)
         if file_exists:
-            with open(settings_path, 'r', encoding='utf-8') as file:
+            with open(Config().SETTINGS_PATH, 'r', encoding='utf-8') as file:
                 data_file = file.readlines()
                 for line in data_file:
-                    key, value = line.split('=')
-                    Config().key = value
+                    if '=' in line:
+                        key, value = line.split('=')
+                        setattr(Config(), key, value.strip())
         else:
-            with open('settings.txt', 'w', encoding='utf-8') as file:
-                variables = list(filter(lambda x: x.isupper(), dir(Config())))
-                print(variables)
-                for variable in variables:
-                    file.write(f'{variable}={getattr(Config, variable)}\n')
+            with open(Config().SETTINGS_PATH, 'w', encoding='utf-8') as file:
+                file.write('API_KEY=None\nFORMAT=short\n' + 'SETTINGS_PATH=' + Config().SETTINGS_PATH + '\n')
 
     @staticmethod
-    def set_variable(key, value) -> None:
+    def set_variable(key: str, value: str) -> None:
+        setattr(Config(), key, value)
+        with open(Config().SETTINGS_PATH, 'r', encoding='utf-8') as file:
+            settings = file.readlines()
 
-        Config().key = value
-        Config().initialize_variables()
-
-
+        with open(Config().SETTINGS_PATH, 'w', encoding='utf-8') as file:
+            for setting in settings:
+                if key in setting:
+                    setting_key, _ = setting.split('=')
+                    file.write(setting_key + '=' + value + '\n')
+                    continue
+                file.write(setting)

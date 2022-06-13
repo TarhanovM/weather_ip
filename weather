@@ -10,8 +10,10 @@ with open(activate_this) as f:
     exec(code, dict(__file__=activate_this))
 
 
+from config import Config
 from cli import cli
 
 
 if __name__ == '__main__':
+    Config().initialize_variables()
     cli()

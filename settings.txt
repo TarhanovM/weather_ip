@@ -1,0 +1,3 @@
+API_KEY=wer
+FORMAT=short
+SETTINGS_PATH=/home/tmd/PycharmProjects/Weather_for_IP/settings.txt
