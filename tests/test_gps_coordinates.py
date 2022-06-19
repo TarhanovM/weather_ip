@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import unittest
 from gps_coordinates import get_coordinates
+import unittest
 
 
 class TestGpsCoordinates(unittest.TestCase):

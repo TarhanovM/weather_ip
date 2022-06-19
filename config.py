@@ -18,33 +18,48 @@ class Config(object):
             cls.instance = super(Config, cls).__new__(cls)
         return cls.instance
 
-    SETTINGS_PATH = '/'.join(os.readlink('/usr/bin/weather').split('/')[:-1]) + '/settings.txt'
-
-    @staticmethod
-    def initialize_variables() -> None:
+    def get_settings_path(self, is_testing: bool = False) -> str:
         """
-        This is staticmethod that initializes user environment variable.
+        This method sets settings path depending on the usage mode
+        :param is_testing: usage mode variable
+        :return: path from the settings
+        """
+        deploy_path = '/'.join(os.readlink('/usr/bin/weather').split('/')[:-1]) + '/settings.txt'
+        testing_path = '/'.join(os.readlink('/usr/bin/weather').split('/')[:-1]) + '/tests/settings.txt'
+        settings_path = deploy_path if not is_testing else testing_path
+        setattr(self, 'SETTINGS_PATH', settings_path)
+        return settings_path
+
+    def initialize_variables(self) -> None:
+        """
+        This method creates the settings file if it does not exist,
+        or reads this file and sets the settings from the instance.
         :return: None.
         """
-        file_exists = os.path.exists(Config().SETTINGS_PATH)
+        file_exists = os.path.exists(getattr(self, 'SETTINGS_PATH'))
         if file_exists:
-            with open(Config().SETTINGS_PATH, 'r', encoding='utf-8') as file:
+            with open(getattr(self, 'SETTINGS_PATH'), 'r', encoding='utf-8') as file:
                 data_file = file.readlines()
                 for line in data_file:
                     if '=' in line:
                         key, value = line.split('=')
                         setattr(Config(), key, value.strip())
         else:
-            with open(Config().SETTINGS_PATH, 'w', encoding='utf-8') as file:
-                file.write('API_KEY=None\nFORMAT=short\n' + 'SETTINGS_PATH=' + Config().SETTINGS_PATH + '\n')
+            with open(getattr(self, 'SETTINGS_PATH'), 'w', encoding='utf-8') as file:
+                file.write('API_KEY=None\nFORMAT=short\n' + 'SETTINGS_PATH=' + getattr(self, 'SETTINGS_PATH') + '\n')
 
-    @staticmethod
-    def set_variable(key: str, value: str) -> None:
+    def set_variable(self, key: str, value: str) -> None:
+        """
+        This method reads the settings file and sets new value from key
+        :param key: key setting
+        :param value: value setting
+        :return: None
+        """
         setattr(Config(), key, value)
-        with open(Config().SETTINGS_PATH, 'r', encoding='utf-8') as file:
+        with open(getattr(self, 'SETTINGS_PATH'), 'r', encoding='utf-8') as file:
             settings = file.readlines()
 
-        with open(Config().SETTINGS_PATH, 'w', encoding='utf-8') as file:
+        with open(getattr(self, 'SETTINGS_PATH'), 'w', encoding='utf-8') as file:
             for setting in settings:
                 if key in setting:
                     setting_key, _ = setting.split('=')
