@@ -37,7 +37,7 @@ class TestGpsCoordinates(unittest.TestCase):
             self.assertEqual(fake_out.getvalue(), printed_data)
 
     def test_long_weather(self):
-        printed_data = f"Location:      {self.Weather.weather['location']['name']} -> " \
+        printed_data = f"Location:          {self.Weather.weather['location']['name']} -> " \
                        f"{self.Weather.weather['location']['region']} -> " \
                        f"{self.Weather.weather['location']['country']}\n" \
                        f"Localtime:         {self.Weather.weather['location']['localtime']}\n" \

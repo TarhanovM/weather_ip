@@ -15,5 +15,7 @@ from cli import cli
 
 
 if __name__ == '__main__':
-    Config().initialize_variables()
+    config = Config()
+    config.get_settings_path()
+    config.initialize_variables()
     cli()

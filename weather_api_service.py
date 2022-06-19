@@ -14,7 +14,7 @@ def get_weather(query: tuple[float, float], config: Type[Config]) -> Union[dict,
     """
     try:
         response = get(f'https://api.weatherapi.com/v1/current.json?key={config.API_KEY}'
-                       f'&q={",".join(list(map(str, query)))}&lang=ru')
+                       f'&q={",".join(list(map(str, query)))}&lang=en')
     except Exception as ex:
         print('Invalid API KEY!')
     else:

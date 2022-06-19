@@ -32,7 +32,7 @@ class Weather(object):
         :return:
         """
         try:
-            print(f"Location:      {self.weather['location']['name']} -> {self.weather['location']['region']} -> "
+            print(f"Location:          {self.weather['location']['name']} -> {self.weather['location']['region']} -> "
                   f"{self.weather['location']['country']}")
             print(f"Localtime:         {self.weather['location']['localtime']}")
             print(f"The current weather:\n"
