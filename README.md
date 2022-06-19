@@ -1,10 +1,4 @@
 <div id="top"></div>
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -132,11 +126,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Michael Tarkhanov - [tarmd@ya.ru](mailto:lunde@adobe.com?subject=[GitHub])
-
 Telegram  - [@michfjk](https://t.me/michfjk)
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
